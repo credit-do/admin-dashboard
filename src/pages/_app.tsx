@@ -7,6 +7,8 @@ import { CssBaseline } from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';
 import { createEmotionCache } from '../utils/create-emotion-cache';
 import { theme } from '../theme';
+import { AppProps } from 'next/app';
+//import { ChakraProvider } from '@chakra-ui/react'
 
 const clientSideEmotionCache = createEmotionCache();
 
@@ -19,23 +21,23 @@ interface Props {
 const App : FC<Props> = ({ Component, emotionCache = clientSideEmotionCache, pageProps}) => {
 
   return (
-    <CacheProvider value={emotionCache}>
-      <Head>
-        <title>
-          Material Kit Pro
-        </title>
-        <meta
-          name="viewport"
-          content="initial-scale=1, width=device-width"
-        />
-      </Head>
-      <LocalizationProvider dateAdapter={AdapterDateFns}>
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
-            <Component {...pageProps} />
-        </ThemeProvider>
-      </LocalizationProvider>
-    </CacheProvider>
+      <CacheProvider value={emotionCache}>
+        <Head>
+          <title>
+            Material Kit Pro
+          </title>
+          <meta
+            name="viewport"
+            content="initial-scale=1, width=device-width"
+          />
+        </Head>
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
+          <ThemeProvider theme={theme}>
+            <CssBaseline />
+              <Component {...pageProps} />
+          </ThemeProvider>
+        </LocalizationProvider>
+      </CacheProvider>
   );
 };
 
