@@ -32,7 +32,12 @@ const CreateClassEvent : React.FC<Props> = ({ saveEventData, eventValues }) => {
     const onSkip = () => {
         nextStep();
     }
-
+    return (
+        <TextField>
+            Hello
+        </TextField>
+    )
+    /*
     return (
         <Stack
             alignItems='center'
@@ -129,7 +134,7 @@ const CreateClassEvent : React.FC<Props> = ({ saveEventData, eventValues }) => {
                 isNextDisabled={!eventFormik.isValid}
             />
         </Stack>
-    )
+    )*/
 }
 
 export default CreateClassEvent

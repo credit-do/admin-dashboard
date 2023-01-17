@@ -87,11 +87,9 @@ const DashboardSidebar : FC<Props> = ({ onClose, open }) => {
               href="/"
               passHref
             >
-              <a>
                 <Logo
                   size={lgUp ? 75 : 50}
                 />
-              </a>
             </NextLink>
           </Box>
         </div>
