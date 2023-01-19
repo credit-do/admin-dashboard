@@ -1,10 +1,26 @@
 export interface UserData {
     email: string;
     firstName: string;
-    lastName: string;
+    username: string;
 	profilePicture: string;
 }
+
 export const userDataKeys = ['email', 'firstName', 'lastName'];
+
+export interface Teacher {
+	userId: string;
+	lastName: string;
+	prefix: string;
+	email: string;
+	school: string;
+}
+
+export interface Student {
+	userId: string
+    lastInitial: string;
+	parentEmail: string;
+	classId: string;
+}
 
 interface Time {
     seconds: number;
@@ -34,13 +50,6 @@ export interface Lesson {
 	title: string;
 	lengthHours: number;
 	completed: boolean;
-}
-
-export interface Student {
-    id: string;
-	firstName: string;
-    lastInitial: string;
-	parentEmail: string;
 }
 
 export interface ToDo {

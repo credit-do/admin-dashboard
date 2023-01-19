@@ -1,6 +1,6 @@
 import { addDoc, AddPrefixToKeys, collection, doc, updateDoc } from 'firebase/firestore';
 import { db } from '../firebase/clientApp'
-
+import { Student } from '../types/user'
 
 export interface StudentInput extends AddPrefixToKeys<string, any> {
     firstName: string;
@@ -8,9 +8,11 @@ export interface StudentInput extends AddPrefixToKeys<string, any> {
     parentEmail: string;
 }
 
-export const createStudent = async (classId: string, studentInput: StudentInput) => {
-    const studentDoc = await addDoc(collection(db, 'classes', classId, 'students'), studentInput);
-    await updateDoc(doc(db, 'classes', classId, 'students', studentDoc.id), { id: studentDoc.id });
+// need to figure out the sign up flow to to determine if a student is ever created after you have the account already
+
+export const createStudent = async (studentInput: Student) => {
+    const studentDoc = await addDoc(collection(db, 'classes', studentInput.classId, 'students'), studentInput);
+    await updateDoc(doc(db, 'classes', studentInput.classId, 'students', studentDoc.id), { id: studentDoc.id });
 }
 
 export const updateStudent = async (classId: string, studentId: string, studentInput: StudentInput) => {
