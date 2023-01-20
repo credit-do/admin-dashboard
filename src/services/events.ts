@@ -1,6 +1,7 @@
 import { db } from "../firebase/clientApp";
 import { addDoc, collection, doc, updateDoc } from "firebase/firestore";
 import { Event, EventInput } from '../types/event'
+import { EventGoal } from '../types/eventGoal'
 
 interface EventData extends EventInput {
 	participants: string[];
@@ -15,7 +16,11 @@ export const createEvent = async (eventInput: EventInput) => {
     return eventDoc.id
 }
 
-
+/*
+export const createTeam = async (eventGoals: EventGoal) => {
+    const 
+}
+*/
 /*
 export const createEvent = async (classId: string, eventInput: EventInput) => {
     const eventData : EventData = {

@@ -9,18 +9,15 @@ import {
 import lessons from "../data/lessons";
 import toDos from "../data/toDos";
 
-import { Class } from "../types/class"
+import { Class, ClassInput } from "../types/class"
 
 export interface ClassInputData {
     name: string;
     time: Date;
 }
 
-interface ClassInput extends ClassInputData {
-    teacherId: string;
-}
 
-export const createClass = async (classInput: Class) => {
+export const createClass = async (classInput: ClassInput) => {
     const classDoc = await addDoc(collection(db, 'classes'), classInput);
     
     /*await Promise.all([
