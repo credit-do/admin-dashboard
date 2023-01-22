@@ -16,7 +16,7 @@ interface Props {
 
 const ClassView : FC<Props> = ({ classData }) => {
 
-    const [isOpen, setIsOpen] = useState<boolean>(true);
+    const [isOpen, setIsOpen] = useState<boolean>(false);
 
     return (
         <Stack

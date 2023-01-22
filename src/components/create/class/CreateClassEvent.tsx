@@ -72,7 +72,6 @@ const CreateClassEvent : React.FC<Props> = ({ saveEventData, eventValues }) => {
                             onBlur={eventFormik.handleBlur}
                             fullWidth
                             error={Boolean(eventFormik.touched.startDate && eventFormik.errors.startDate)}
-                            helperText={eventFormik.touched.startDate && eventFormik.errors.startDate}
                         />
                     )}
                 />
@@ -88,7 +87,6 @@ const CreateClassEvent : React.FC<Props> = ({ saveEventData, eventValues }) => {
                             name="endDate"
                             fullWidth
                             error={Boolean(eventFormik.touched.endDate && eventFormik.errors.endDate)}
-                            helperText={eventFormik.touched.endDate && eventFormik.errors.endDate}
                             onBlur={eventFormik.handleBlur}
                         />
                     )}

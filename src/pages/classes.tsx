@@ -13,8 +13,8 @@ import RosterView from '../components/classes/RosterView';
 
 export const displayOptions = [
     "Roster",
-    "Leaderboard",
     "Metrics",
+    "Leaderboard"
 ] as const;
 export type DisplayOptionTypes = typeof displayOptions[number];  
 

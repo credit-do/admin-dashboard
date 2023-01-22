@@ -130,7 +130,6 @@ const CreateEventComponent : FC<Props> = ({ classId }) => {
                                     name="startDate"
                                     onBlur={formik.handleBlur}
                                     error={Boolean(formik.touched.startDate && formik.errors.startDate)}
-                                    helperText={formik.touched.startDate && formik.errors.startDate}
                                 />
                             )}
                         />
@@ -145,7 +144,6 @@ const CreateEventComponent : FC<Props> = ({ classId }) => {
                                     {...params}
                                     name="endDate"
                                     error={Boolean(formik.touched.endDate && formik.errors.endDate)}
-                                    helperText={formik.touched.endDate && formik.errors.endDate}
                                     onBlur={formik.handleBlur}
                                 />
                             )}
