@@ -1,7 +1,8 @@
 export interface UserData {
-    email: string;
+	userId: string;
+	type: 'teacher' | 'student';
+    username: string;
     firstName: string;
-    lastName: string;
 	profilePicture: string;
 }
 export const userDataKeys = ['email', 'firstName', 'lastName'];
@@ -12,35 +13,81 @@ interface Time {
 }
 
 export interface Event {
-    id: string;
-	title: string;
+    eventId: string;
+	classes: string[]; // array of Class.classId
+	name: string;
+	address: string;
 	startDate: Time;
 	endDate: Time;
-	address: string;
-	participants: string[]; // array of ids
-	complete: boolean;
-	poundsCollected: number;
+	pictureUrl: string
+	teams: Team[];
+}
+
+export interface Team {
+	teamId: string;
+	classId: string; // Class.classId
+	teamName: string;
+	progress: Contributions;
+	students: string[]; // array of Student.userId
+	goals: EventGoal[];
+}
+export interface EventGoal {
+	goalId: string;
+	description: string;
+	completed: boolean;
+}
+export interface Contributions {
+	contributionId: string;
+	eventId: string;
+	studentId: string;
+	hours: number;
+	pounds: number;
 }
 
 export interface Class {
+	classId: string;
     name: string;
     teacherId: string;
+	student: string[]; // array of ids
     time: Time;
-    id: string;
+    events: string[]; // array of Event.eventId
+	district: string;
+	joinCode: string;
+	lessonsCompleted: string[] // array of Lesson.lessonId
 }
 
 export interface Lesson {
-    id: string;
+    lessonId: string;
 	title: string;
 	lengthHours: number;
-	completed: boolean;
+	subject: string;
+	dueDate: Time;
+	content: string;
+}
+
+export interface Teacher {
+	userId: string;
+	lastName: string;
+	prefix: string;
+	email: string;
+	school: string;
 }
 
 export interface Student {
-    id: string;
-	firstName: string;
-    lastInitial: string;
-	parentEmail: string;
+    userId: string;
+	lastInitial: string;
+    parentEmail: string;
+	classId: string;
+	personalGoal: PersonalGoal[];
+	completedLessons: Lesson[];
+}
+
+interface PersonalGoal {
+	goalId: string;
+	description: string;
+	type: 'short' | 'long';
+	complete: boolean;
+	dueDate: Time;
 }
 
 export interface ToDo {

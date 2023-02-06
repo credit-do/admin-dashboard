@@ -46,9 +46,7 @@ const useClasses = () => {
     }
 
     const [classes, loading, error] = useCollection<Class>(auth && query(collection(db, 'classes') as CollectionReference<Class>, where('teacherId', '==', auth.uid)));
-
     const allClasses = classes ? classes.docs.map(doc => ({ ...doc.data(), id: doc.id })) : [];
-
     return {
         classView: classViewVal,
         setClassView,
