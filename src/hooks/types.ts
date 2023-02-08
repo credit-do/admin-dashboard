@@ -1,11 +1,10 @@
 export interface UserData {
-	userId: string;
-	type: 'teacher' | 'student';
-    username: string;
+    email: string;
     firstName: string;
+    lastName: string;
 	profilePicture: string;
 }
-export const userDataKeys = ['email', 'firstName', 'lastName'];
+export const userDataKeys = ['email', 'firstName', 'lastName', 'profilePicture', 'school', 'prefix', 'district'];
 
 interface Time {
     seconds: number;
@@ -13,81 +12,35 @@ interface Time {
 }
 
 export interface Event {
-    eventId: string;
-	classes: string[]; // array of Class.classId
-	name: string;
-	address: string;
+    id: string;
+	title: string;
 	startDate: Time;
 	endDate: Time;
-	pictureUrl: string
-	teams: Team[];
-}
-
-export interface Team {
-	teamId: string;
-	classId: string; // Class.classId
-	teamName: string;
-	progress: Contributions;
-	students: string[]; // array of Student.userId
-	goals: EventGoal[];
-}
-export interface EventGoal {
-	goalId: string;
-	description: string;
-	completed: boolean;
-}
-export interface Contributions {
-	contributionId: string;
-	eventId: string;
-	studentId: string;
-	hours: number;
-	pounds: number;
+	address: string;
+	participants: string[]; // array of ids
+	complete: boolean;
+	poundsCollected: number;
 }
 
 export interface Class {
-	classId: string;
     name: string;
     teacherId: string;
-	student: string[]; // array of ids
     time: Time;
-    events: string[]; // array of Event.eventId
-	district: string;
-	joinCode: string;
-	lessonsCompleted: string[] // array of Lesson.lessonId
+    id: string;
 }
 
 export interface Lesson {
-    lessonId: string;
+    id: string;
 	title: string;
 	lengthHours: number;
-	subject: string;
-	dueDate: Time;
-	content: string;
-}
-
-export interface Teacher {
-	userId: string;
-	lastName: string;
-	prefix: string;
-	email: string;
-	school: string;
+	completed: boolean;
 }
 
 export interface Student {
-    userId: string;
-	lastInitial: string;
-    parentEmail: string;
-	classId: string;
-	personalGoal: PersonalGoal[];
-	completedLessons: Lesson[];
-}
-
-interface PersonalGoal {
-	goalId: string;
-	description: string;
-	type: 'short' | 'long';
-	complete: boolean;
-	dueDate: Time;
+    id: string;
+	firstName: string;
+    lastInitial: string;
+	parentEmail: string;
 }
 
 export interface ToDo {
@@ -101,5 +54,3 @@ export interface ToDo {
 export const todoTabs = ['Before Event', 'After Event', 'Completed'] as const;
 
 export const statuses = ['Not Started', 'Past Due', 'Completed'] as const;
-
-

@@ -27,7 +27,7 @@ interface ReturnType {
     auth: User | null;
     user: UserData | null;
     loading: boolean,
-    teacherSignUp: (email: string, password: string, userData: UserData) => Promise<void>;
+    signUp: (email: string, password: string, userData: UserData) => Promise<void>;
     signIn: (email: string, password: string) => Promise<void>;
     signOut: () => Promise<void>;
     updateUser: (userData: UserData) => Promise<void>;
@@ -37,7 +37,7 @@ const init : ReturnType = {
     auth: null,
     user: null,
     loading: true,
-    teacherSignUp: async (email: string, password: string, userData: UserData) => {},
+    signUp: async (email: string, password: string, userData: UserData) => {},
     signIn: async (email: string, password: string) => {},
     signOut: async () => {},
     updateUser: async (userData: UserData) => {}
@@ -46,13 +46,12 @@ const init : ReturnType = {
 const useAuth = () : ReturnType => {
 
     const [authObj, authLoading] = useAuthState(auth);
-    const [userData, userLoading] = useDocumentData<UserData>(authObj && doc(db, 'users', authObj.uid) as DocumentReference<UserData>);
+    const [userData, userLoading] = useDocumentData<UserData>(authObj && doc(db, 'teachers', authObj.uid) as DocumentReference<UserData>);
     
-    const teacherSignUp = async (email: string, password: string, userData: UserData) => {
+    const signUp = async (email: string, password: string, userData: UserData) => {
         const cred = await createUserWithEmailAndPassword(auth, email, password);
-        createTeacher(cred.user.uid, userData);
         if(cred) {
-            await setDoc(doc(db, 'users', cred.user.uid), userData);
+            await setDoc(doc(db, 'teachers', cred.user.uid), userData);
         }
     }
 
@@ -66,11 +65,10 @@ const useAuth = () : ReturnType => {
     
 
     const updateUser = async (userData: UserData) => {
-        /*
         if(userData.email !== authObj.email) {
             await updateEmail(authObj, userData.email);
         }
-        await setDoc(doc(db, 'users', authObj.uid), userData);*/
+        await setDoc(doc(db, 'teachers', authObj.uid), userData);
     }
 
 
@@ -78,7 +76,7 @@ const useAuth = () : ReturnType => {
         auth: authObj,
         user: userData,
         loading: authLoading || userLoading,
-        teacherSignUp,
+        signUp,
         signIn,
         signOut,
         updateUser
