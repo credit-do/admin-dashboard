@@ -54,3 +54,11 @@ export interface ToDo {
 export const todoTabs = ['Before Event', 'After Event', 'Completed'] as const;
 
 export const statuses = ['Not Started', 'Past Due', 'Completed'] as const;
+
+
+export interface EmailInput {
+	template: string;
+	recipients: string;
+	variableKeys: string[];
+	variableVals: string[];
+}

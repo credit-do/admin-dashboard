@@ -20,7 +20,6 @@ interface Props {
 }
 
 const ProgressBar : FC<Props> = ({ lessons }) => {
-
     const steps : Step[] = lessons.map(lesson => ({
         status: getLessonStatus(lesson),
         title: lesson.title,
