@@ -7,13 +7,13 @@ export interface StudentInput extends AddPrefixToKeys<string, any> {
     lastInitial: string;
     parentEmail: string;
     classId: string;
-    completedLesson: boolean[];
+    completedLessons: boolean[];
     joinPermission: boolean;
 }
 
 export const createStudent = async (classId: string, studentInput: StudentInput) => {
     studentInput.classId = classId;
-    studentInput.completedLesson = [];
+    studentInput.completedLessons = [];
     studentInput.joinPermission = false;
     const studentDoc = await addDoc(collection(db, 'classes', classId, 'students'), studentInput);
     await updateDoc(doc(db, 'classes', classId, 'students', studentDoc.id), { id: studentDoc.id });

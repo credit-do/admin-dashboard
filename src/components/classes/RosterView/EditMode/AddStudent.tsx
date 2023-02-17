@@ -42,7 +42,12 @@ const AddStudent : FC<Props> = ({ classId }) => {
         .required('Email is required'),
     }),
     onSubmit: async () => {
-      await createStudent(classId, {...formik.values});
+      await createStudent(classId, {
+        ...formik.values,
+        classId: '',
+        completedLessons: [],
+        joinPermission: true,
+      });
       formik.resetForm();
     },
     validateOnMount: true,

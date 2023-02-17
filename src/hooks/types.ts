@@ -35,14 +35,15 @@ export interface Lesson {
 	lengthHours: number;
 	completed: boolean;
 }
-
 export interface Student {
     id: string;
 	firstName: string;
-    lastInitial: string;
-	parentEmail: string;
+	lastInitial: string;
+    parentEmail: string;
+	classId: string;
+	completedLessons: boolean[];
+	joinPermission: boolean;
 }
-
 export interface ToDo {
 	id: number;
 	title: string;
