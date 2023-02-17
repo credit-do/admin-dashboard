@@ -32,6 +32,7 @@
     "lodash.pick": "^4.4.0",
     "moment": "^2.29.4",
     "next": "^12.0.3-canary.7",
+    "niceware": "^4.0.0",
     "nprogress": "^0.2.0",
     "prop-types": "^15.7.2",
     "react": "^18.2.0",
