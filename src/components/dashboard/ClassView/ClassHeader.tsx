@@ -27,7 +27,7 @@ const ClassHeader : React.FC<Props> = ({ classData, isOpen, setIsOpen }) => {
             variant="h6"
             fontWeight='bold'
             sx={{
-                color: isOpen ? 'secondary.main' : '#9CA3AF',
+                color: isOpen ? 'secondary.main' : '#7d828a',
             }}
         >
             {classData.name} ({moment(classData.time.seconds * 1000).format('h:mm a')})

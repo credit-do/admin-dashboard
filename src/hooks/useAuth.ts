@@ -21,6 +21,7 @@ import {
 import { doc, DocumentReference, setDoc } from 'firebase/firestore'
 
 import { UserData } from './types';
+import { createTeacher } from '../services/teacher';
 
 interface ReturnType {
     auth: User | null;
@@ -45,12 +46,12 @@ const init : ReturnType = {
 const useAuth = () : ReturnType => {
 
     const [authObj, authLoading] = useAuthState(auth);
-    const [userData, userLoading] = useDocumentData<UserData>(authObj && doc(db, 'users', authObj.uid) as DocumentReference<UserData>);
+    const [userData, userLoading] = useDocumentData<UserData>(authObj && doc(db, 'teachers', authObj.uid) as DocumentReference<UserData>);
     
     const signUp = async (email: string, password: string, userData: UserData) => {
         const cred = await createUserWithEmailAndPassword(auth, email, password);
         if(cred) {
-            await setDoc(doc(db, 'users', cred.user.uid), userData);
+            await setDoc(doc(db, 'teachers', cred.user.uid), userData);
         }
     }
 
@@ -61,12 +62,13 @@ const useAuth = () : ReturnType => {
     const signOut = async () => {
         await authSignOut(auth);
     }
+    
 
     const updateUser = async (userData: UserData) => {
         if(userData.email !== authObj.email) {
             await updateEmail(authObj, userData.email);
         }
-        await setDoc(doc(db, 'users', authObj.uid), userData);
+        await setDoc(doc(db, 'teachers', authObj.uid), userData);
     }
 
 

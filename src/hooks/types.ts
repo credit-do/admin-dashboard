@@ -4,7 +4,7 @@ export interface UserData {
     lastName: string;
 	profilePicture: string;
 }
-export const userDataKeys = ['email', 'firstName', 'lastName'];
+export const userDataKeys = ['email', 'firstName', 'lastName', 'profilePicture', 'school', 'prefix', 'district'];
 
 interface Time {
     seconds: number;
@@ -35,14 +35,15 @@ export interface Lesson {
 	lengthHours: number;
 	completed: boolean;
 }
-
 export interface Student {
     id: string;
 	firstName: string;
-    lastInitial: string;
-	parentEmail: string;
+	lastInitial: string;
+    parentEmail: string;
+	classId: string;
+	completedLessons: boolean[];
+	joinPermission: boolean;
 }
-
 export interface ToDo {
 	id: number;
 	title: string;
@@ -56,3 +57,9 @@ export const todoTabs = ['Before Event', 'After Event', 'Completed'] as const;
 export const statuses = ['Not Started', 'Past Due', 'Completed'] as const;
 
 
+export interface EmailInput {
+	template: string;
+	recipients: string;
+	variableKeys: string[];
+	variableVals: string[];
+}

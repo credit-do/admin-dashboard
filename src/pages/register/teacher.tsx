@@ -18,13 +18,17 @@ import {
   Stack,
   TextField,
   Typography,
-  Avatar
+  Avatar,
+  MenuItem
 } from '@mui/material';
 
 import useAuth from '../../hooks/useAuth';
 import { userDataKeys } from '../../hooks/types';
 
 var pick = require('lodash.pick');
+
+const prefixes = ['Mr.', 'Mrs.', 'Ms.', 'Dr.'];
+
 
 const RegisterTeacher : NextPage = () => {
   const router = useRouter();
@@ -40,6 +44,9 @@ const RegisterTeacher : NextPage = () => {
       password: '',
       policy: false,
       profilePicture: '',
+      prefix: '',
+      school: '',
+      district: ''
     },
     validationSchema: Yup.object({
       email: Yup
@@ -64,6 +71,21 @@ const RegisterTeacher : NextPage = () => {
         .max(255)
         .required(
           'Password is required'),
+      prefix: Yup
+        .string()
+        .max(255)
+        .required(
+          'Prefix is required'),
+      school: Yup
+        .string()
+        .max(255)
+        .required(
+          'School is required'),
+      district: Yup
+        .string()
+        .max(255)
+        .required(
+          'District is required'),
       policy: Yup
         .boolean()
         .oneOf(
@@ -180,6 +202,24 @@ const RegisterTeacher : NextPage = () => {
                 variant="outlined"
               />
               <TextField
+                error={Boolean(formik.touched.prefix && formik.errors.prefix)}
+                fullWidth
+                helperText={formik.touched.prefix && formik.errors.prefix}
+                select
+                label="Prefix"
+                name="prefix"
+                onBlur={formik.handleBlur}
+                onChange={formik.handleChange}
+                value={formik.values.prefix}
+                variant="outlined"
+              >
+                {prefixes.map((option) => (
+                  <MenuItem key={option} value={option}>
+                    {option}
+                  </MenuItem>
+                ))}
+              </TextField>
+              <TextField
                 error={Boolean(formik.touched.email && formik.errors.email)}
                 fullWidth
                 helperText={formik.touched.email && formik.errors.email}
@@ -203,6 +243,35 @@ const RegisterTeacher : NextPage = () => {
                 value={formik.values.password}
                 variant="outlined"
               />
+              <Stack
+                direction='row'
+                spacing={2}
+              >
+                <TextField
+                  error={Boolean(formik.touched.school && formik.errors.school)}
+                  helperText={formik.touched.school && formik.errors.school}
+                  fullWidth
+                  label="School"
+                  name="school"
+                  onBlur={formik.handleBlur}
+                  onChange={formik.handleChange}
+                  type="school"
+                  value={formik.values.school}
+                  variant="outlined"
+                />
+                <TextField
+                  error={Boolean(formik.touched.district && formik.errors.district)}
+                  helperText={formik.touched.district && formik.errors.district}
+                  fullWidth
+                  label="District"
+                  name="district"
+                  onBlur={formik.handleBlur}
+                  onChange={formik.handleChange}
+                  type="district"
+                  value={formik.values.district}
+                  variant="outlined"
+                />
+              </Stack>
               <Box
                 sx={{
                   alignItems: 'center',
