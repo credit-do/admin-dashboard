@@ -17,7 +17,7 @@ export const createStudent = async (classId: string, studentInput: StudentInput)
     studentInput.completedLessons = [];
     studentInput.joinPermission = false;
 
-    const password = studentInput.firstName + studentInput.lastInitial + Math.random() * (4);
+    const password = studentInput.firstName.toLowerCase() + studentInput.lastInitial.toLowerCase() + Math.floor(Math.random() * (10));
 
     // this needs to be updated so that it checks if the parent email already exists in the database
     // right now it only checks twice, but in the edge case of more than 1 sibling, it may still fail.
