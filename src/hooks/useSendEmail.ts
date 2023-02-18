@@ -19,12 +19,12 @@ export const sendEmail = async (emailInput: EmailInput) => {
     await fetch('/api/email/introEmail', request).catch((err) => {return err});
 }
 
-export const sendPermissionEmail = async (studentName: string, parentEmail: string) => {
+export const sendPermissionEmail = async (studentName: string, parentEmail: string, password: string) => {
     const emailInput = {
         template: 'permissions',
         recipients: parentEmail,
-        variableKeys: ['v:studentName'],
-        variableVals: [studentName],
+        variableKeys: ['v:studentName', 'v:parentEmail', 'v:password'],
+        variableVals: [studentName, parentEmail, password],
     }
     return sendEmail(emailInput);
 }   
