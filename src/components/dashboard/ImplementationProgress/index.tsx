@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { auth, secondaryAuth } from '../../../firebase/clientApp';
 
 import Skeleton from '@mui/material/Skeleton'
 
@@ -16,18 +17,18 @@ interface Props {
 const ImplementationProgress : React.FC<Props> = ({ compact, classId }) => {
 
   const { toDoBuckets, loading, check, uncheck } = useToDos(classId);
+  // console.log(toDoBuckets);
+  // const [activeBucket, setActiveBucket] = useState<typeof statuses[number]>('Not Started');
 
-  const [activeBucket, setActiveBucket] = useState<typeof statuses[number]>('Not Started');
-
-  const onClick = (status: typeof statuses[number]) => {
-    if(status !== activeBucket){
-      setActiveBucket(status);
-    }
-  }
+  // const onClick = (status: typeof statuses[number]) => {
+  //   if(status !== activeBucket){
+  //     setActiveBucket(status);
+  //   }
+  // }
 
   return (
     <SectionContainer
-        title='Implementation Progress'
+        title='To-Do List'
         compact={compact}
         navigateTo='/learn'
     >
@@ -38,7 +39,7 @@ const ImplementationProgress : React.FC<Props> = ({ compact, classId }) => {
           />
         ) : (
           <>
-            <DonutView
+            {/* <DonutView
               compact={compact}
               statusCount={{
                 'Not Started': toDoBuckets['Not Started'].length,
@@ -46,12 +47,11 @@ const ImplementationProgress : React.FC<Props> = ({ compact, classId }) => {
                 'Completed': toDoBuckets['Completed'].length
               }}
               setActiveBucket={onClick}
-            />
+            /> */}
             {
               !compact && (
                 <ToDos
-                  activeBucket={activeBucket}
-                  toDos={toDoBuckets[activeBucket]}
+                  toDos={toDoBuckets}
                   check={check}
                   uncheck={uncheck}
                 />

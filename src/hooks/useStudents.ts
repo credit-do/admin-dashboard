@@ -1,19 +1,19 @@
 
 import { db } from "../firebase/clientApp";
-import { useCollectionData } from "react-firebase-hooks/firestore";
-import { collection, CollectionReference, query } from "firebase/firestore";
+import { useCollection, useCollectionData } from "react-firebase-hooks/firestore";
+import { collection, CollectionReference, getDocs, query, where } from "firebase/firestore";
 
 import { Student } from "./types";
+import { useEffect } from "react";
 
 const useStudents = (classId : string) => {
-    
-    const [students, loading, error] = useCollectionData<Student>(query(
-        collection(db, "classes", classId, "students") as CollectionReference<Student>, 
-    ));
 
+    const [students, loading, error] = useCollection<Student>(classId && query(collection(db, "students") as CollectionReference<Student>, where("classId", "==", classId)));
+    const allStudents = students ? students.docs.map(doc => ({ ...doc.data(), id: doc.id })) : [];
+    
     return {
-        students : students || [],
-        loading,
+        students : allStudents || [],
+        loading
     }
 }
 

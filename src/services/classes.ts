@@ -15,6 +15,7 @@ export interface ClassInputData {
 }
 
 interface ClassInput extends ClassInputData {
+    teacherEmail: string;
     teacherId: string;
 }
 

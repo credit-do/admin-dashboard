@@ -47,8 +47,9 @@ const useAuth = () : ReturnType => {
 
     const [authObj, authLoading] = useAuthState(auth);
     const [userData, userLoading] = useDocumentData<UserData>(authObj && doc(db, 'teachers', authObj.uid) as DocumentReference<UserData>);
-    
+
     const signUp = async (email: string, password: string, userData: UserData) => {
+        console.log('signing up');
         const cred = await createUserWithEmailAndPassword(auth, email, password);
         if(cred) {
             await setDoc(doc(db, 'teachers', cred.user.uid), userData);
@@ -56,13 +57,14 @@ const useAuth = () : ReturnType => {
     }
 
     const signIn = async (email: string, password: string) => {
+        console.log('signing in');
         await signInWithEmailAndPassword(auth, email, password);
     }
 
     const signOut = async () => {
+        console.log('signing out');
         await authSignOut(auth);
     }
-    
 
     const updateUser = async (userData: UserData) => {
         if(userData.email !== authObj.email) {

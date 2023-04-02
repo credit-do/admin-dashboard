@@ -38,7 +38,7 @@ const DonutView : React.FC<Props> = ({ setActiveBucket, compact, statusCount }) 
         formatValues={(value) => `${value}%`}
         height={compact ? 150 : 200}
         width={compact ? 150 : 200}
-        legend={false}
+        legend={true}
         onClick={(status) => {
           setActiveBucket(status.label as typeof statuses[number]);
         }}

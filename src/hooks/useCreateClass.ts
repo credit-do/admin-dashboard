@@ -109,7 +109,7 @@ const useCreateClass = () => {
 
     const submit = async () => {
         setSubmitting(true);
-        const classId = await createClass({...classFormik.values, teacherId: auth.uid});
+        const classId = await createClass({...classFormik.values, teacherEmail: auth.email, teacherId: auth.uid});
         await Promise.all(studentsFormik.values.students.map(async (student : StudentInput) => (
             createStudent(classId, student)
         )))

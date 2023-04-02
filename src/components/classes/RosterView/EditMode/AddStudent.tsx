@@ -43,10 +43,7 @@ const AddStudent : FC<Props> = ({ classId }) => {
     }),
     onSubmit: async () => {
       await createStudent(classId, {
-        ...formik.values,
-        classId: '',
-        completedLessons: [],
-        joinPermission: true,
+        ...formik.values
       });
       formik.resetForm();
     },

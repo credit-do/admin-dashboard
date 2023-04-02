@@ -1,5 +1,6 @@
 import mailgun, { FROM_EMAIL } from '../../../mailgun';
 import Mailgun from 'mailgun-js';
+import type { NextApiRequest, NextApiResponse } from 'next'
 
 const messageDataParser = (req): Mailgun.messages.SendTemplateData => {
   const { template, recipient, variableKeys, variableVals } = req.body;
@@ -12,7 +13,7 @@ const messageDataParser = (req): Mailgun.messages.SendTemplateData => {
   return messageData;
 }
 
-export default function handler(req, res) {
+export default function handler(req: NextApiRequest, res: NextApiResponse) {
     if (req.method !== 'POST') res.status(400).json({ error: 'Bad request' });
 
     if (!req.body) res.status(400).json({ error: 'No body' });
@@ -20,7 +21,8 @@ export default function handler(req, res) {
     if (!req.body.template || !req.body.recipient) res.status(400).json({ error: 'Missing fields' });
 
     const msg: Mailgun.messages.SendTemplateData = messageDataParser(req);
+    console.log(msg.to);
     mailgun.messages().send(msg, (error, body) => {console.log(error);});
-
+    setTimeout(() => {console.log('sent')}, 5000);
     res.status(200).json({ name: 'John Doe' });
 }

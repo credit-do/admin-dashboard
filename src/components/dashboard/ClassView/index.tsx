@@ -16,7 +16,7 @@ interface Props {
 
 const ClassView : FC<Props> = ({ classData }) => {
 
-    const [isOpen, setIsOpen] = useState<boolean>(false);
+    const [isOpen, setIsOpen] = useState<boolean>(true);
 
     return (
         <Stack
@@ -54,9 +54,6 @@ const ClassView : FC<Props> = ({ classData }) => {
                 <Stack
                     spacing={2}
                     flexGrow={1}
-                    // sx={{
-                    //     gridColumnStart: '1'
-                    // }}
                 >
                     <ImplementationProgress
                         compact={!isOpen}

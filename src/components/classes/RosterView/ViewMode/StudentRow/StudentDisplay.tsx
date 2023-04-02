@@ -9,12 +9,16 @@ import useAvatar from '../../../../../hooks/useAvatar'
 interface Props {
     firstName: string
     lastInitial: string
+    profilePicture: string
 }
 
-const StudentDisplay : FC<Props> = ({ firstName, lastInitial }) => {
+const StudentDisplay : FC<Props> = ({ firstName, lastInitial, profilePicture }) => {
 
-  const { uri } = useAvatar();
-
+  let { uri } = useAvatar();
+  if (profilePicture) {
+    uri = profilePicture;
+  }
+  console.log(uri);
   return (
     <Stack
       direction="row"
