@@ -1,7 +1,7 @@
 import { addDoc, AddPrefixToKeys, collection, doc, getDocs, updateDoc, setDoc } from 'firebase/firestore';
 import { db, secondaryAuth } from '../firebase/clientApp'
 import { sendPermissionEmail } from '../hooks/useSendEmail';
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, fetchSignInMethodsForEmail } from "firebase/auth";
 
 export interface StudentInput extends AddPrefixToKeys<string, any> {
     firstName: string;
@@ -15,13 +15,24 @@ interface StudentDocInput extends StudentInput {
     joinPermission: boolean;
 }
 
+const findEmail = async (auth, email, name,  iter) => {
+    const newEmail = email.split('@')[0] + "+" +name+ iter + "@" + email.split('@')[1];
+    const methods = await fetchSignInMethodsForEmail(auth, newEmail);
+    // if method is empty, then the email is not in the database
+    if (methods.length != 0) {
+        return await findEmail(auth, email,name, iter + 1);
+    }
+    return newEmail;
+}
 
 export const createStudent = async (classId: string, studentInput: StudentInput) => {
 
-    const password = studentInput.firstName + studentInput.lastInitial + Math.random() * (4);
-
+    const password = studentInput.firstName.toLowerCase() + studentInput.lastInitial.toLowerCase() + Math.floor(Math.random() * (999 - 100) + 100);
+    studentInput.parentEmail = await findEmail(auth, studentInput.parentEmail, studentInput.firstName, 1);
+    
     // this needs to be updated so that it checks if the parent email already exists in the database
     // right now it only checks twice, but in the edge case of more than 1 sibling, it may still fail.
+
     createUserWithEmailAndPassword(secondaryAuth, studentInput.parentEmail, password)
     .catch((error) => {
         if (error.code == "email-already-in-use")
@@ -30,6 +41,7 @@ export const createStudent = async (classId: string, studentInput: StudentInput)
         studentInput.firstName + "@" + studentInput.parentEmail.split('@')[1] + Math.random() * (4);
         createUserWithEmailAndPassword(secondaryAuth, studentInput.parentEmail, password);
     });
+
 
     const studentDocInput = {
         ...studentInput,
@@ -60,9 +72,3 @@ export const updateStudent = async ( studentId: string, studentInput: StudentInp
     await updateDoc(doc(db, 'students', studentId), studentInput);
 }
 
-// should write this function that takes a parentEmail and returns a parentEmail that hasn't been used yet
-// case 1: parentEmail is not in the database, return parentEmail
-// case 2: parentEmail is in the database, return parentEmail + random number
-const createParentEmail = async (parentEmail: string) => {
-
-}
