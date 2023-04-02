@@ -20,6 +20,9 @@ const Dashboard : NextPage = () => {
 
   const { classes } = useClasses();
 
+  console.log('classes', classes);
+
+
   if (loading) return (
     <Stack
       alignItems='center'

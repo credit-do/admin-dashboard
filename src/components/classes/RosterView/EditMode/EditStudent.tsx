@@ -29,9 +29,6 @@ const EditStudent : FC<Props> = ({ student, classId }) => {
             firstName: student.firstName,
             lastInitial: student.lastInitial,
             parentEmail: student.parentEmail,
-            classId: classId,
-            completedLessons: student.completedLessons,
-            joinPermission: student.joinPermission,
         },
         validationSchema: Yup.object({
             firstName: Yup.string()
@@ -44,7 +41,7 @@ const EditStudent : FC<Props> = ({ student, classId }) => {
                 .required('Email is required'),
         }),
         onSubmit: async () => {
-            await updateStudent(classId, student.id, formik.values);
+            await updateStudent(student.id, formik.values);
         }
     })
 

@@ -13,7 +13,7 @@ type ToDoBuckets = {
 const useToDos = (classId : string) => {
 
     const [toDos, loading, error] = useCollectionData<ToDo>(query(collection(db, "classes", classId, "toDos") as CollectionReference<ToDo>, orderBy('id', 'asc')));
-
+    
     const check = async (toDoId : string) => {
         return updateDoc(doc(db, "classes", classId, "toDos", toDoId), {completed: true});
     }
@@ -34,11 +34,12 @@ const useToDos = (classId : string) => {
                     acc['Completed'].push(toDo);
                 }
                 else {
-                    if(moment().isAfter(toDo.dueDate.seconds * 1000)){
-                        acc['Past Due'].push(toDo);
-                    } else {
-                        acc['Not Started'].push(toDo);
-                    }
+                    acc['Not Started'].push(toDo);
+                    // if(moment().isAfter(toDo.dueDate.seconds * 1000)){
+                    //     acc['Past Due'].push(toDo);
+                    // } else {
+                    //     acc['Not Started'].push(toDo);
+                    // }
                 }
                 return acc;
             },

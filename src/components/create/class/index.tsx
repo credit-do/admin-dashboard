@@ -42,7 +42,7 @@ const CreateClassComponent : React.FC = () => {
                 'Time is required'),
       }),
       onSubmit: async () => {
-        createClass({teacherId: auth.uid, ...formik.values})
+        createClass({teacherId: auth.uid, teacherEmail: auth.email, ...formik.values})
         .then(() => {
             setSubmitted(true);
         })

@@ -68,9 +68,6 @@ const AddStudents : FC<Props> = ({ saveStudentsData, studentsValues }) => {
                         firstName: '',
                         lastInitial: '',
                         parentEmail: '',
-                        classId: '',
-                        completedLessons: [false, false, false, false, false, false],
-                        joinPermission: true,
                     }]))
                 }}
             />

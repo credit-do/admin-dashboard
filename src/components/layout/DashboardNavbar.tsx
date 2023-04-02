@@ -35,7 +35,7 @@ interface Props {
 const DashboardNavbar : React.FC<Props> = ({ onSidebarOpen, ...other}) => {
 
   const { user } = useAuth();
-
+  console.log(user);
   return (
     <DashboardNavbarRoot
       sx={{

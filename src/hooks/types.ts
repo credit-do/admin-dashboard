@@ -43,6 +43,7 @@ export interface Student {
 	classId: string;
 	completedLessons: boolean[];
 	joinPermission: boolean;
+	profilePicture: string;
 }
 export interface ToDo {
 	id: number;

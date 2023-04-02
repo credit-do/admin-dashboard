@@ -19,7 +19,7 @@ const ClassView : FC<Props> = ({ classData }) => {
     const [isEditMode, setIsEditMode] = useState<boolean>(false);
 
     const { students } = useStudents(classData.id);
-
+    console.log(students);
     return (
         <Stack
             spacing={2}
